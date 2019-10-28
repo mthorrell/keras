@@ -1154,7 +1154,7 @@ class Model(Network):
             sample_weight=sample_weight,
             class_weight=class_weight,
             batch_size=batch_size,
-            check_array_lengths=!skip_data_checks)
+            check_array_lengths=not skip_data_checks)
 
         # Prepare validation data.
         do_validation = False
