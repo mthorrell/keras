@@ -971,6 +971,7 @@ class Model(Network):
             max_queue_size=10,
             workers=1,
             use_multiprocessing=False,
+            skip_data_checks=False,
             **kwargs):
         """Trains the model for a fixed number of epochs (iterations on a dataset).
 
@@ -1144,14 +1145,16 @@ class Model(Network):
                 workers=workers,
                 use_multiprocessing=use_multiprocessing,
                 shuffle=shuffle,
-                initial_epoch=initial_epoch)
+                initial_epoch=initial_epoch,
+                skip_data_checks=skip_data_checks)
 
         # Case 2: Symbolic tensors or Numpy array-like.
         x, y, sample_weights = self._standardize_user_data(
             x, y,
             sample_weight=sample_weight,
             class_weight=class_weight,
-            batch_size=batch_size)
+            batch_size=batch_size,
+            check_array_lengths=!skip_data_checks)
 
         # Prepare validation data.
         do_validation = False
