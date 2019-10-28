@@ -34,7 +34,8 @@ def fit_generator(model,
                   workers=1,
                   use_multiprocessing=False,
                   shuffle=True,
-                  initial_epoch=0):
+                  initial_epoch=0,
+                  skip_data_checks=False):
     """See docstring for `Model.fit_generator`."""
     epoch = initial_epoch
 
@@ -147,7 +148,7 @@ def fit_generator(model,
                                      'or `(val_x, val_y)`. Found: ' +
                                      str(validation_data))
                 val_x, val_y, val_sample_weights = model._standardize_user_data(
-                    val_x, val_y, val_sample_weight)
+                    val_x, val_y, val_sample_weight, check_array_lengths=not skip_data_checks)
                 val_data = val_x + val_y + val_sample_weights
                 if model.uses_learning_phase and not isinstance(K.learning_phase(),
                                                                 int):

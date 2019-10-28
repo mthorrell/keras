@@ -1597,7 +1597,8 @@ class Model(Network):
                       workers=1,
                       use_multiprocessing=False,
                       shuffle=True,
-                      initial_epoch=0):
+                      initial_epoch=0,
+                      skip_data_checks=False):
         """Trains the model on data generated batch-by-batch by a Python generator
         (or an instance of `Sequence`).
 
@@ -1732,7 +1733,8 @@ class Model(Network):
             workers=workers,
             use_multiprocessing=use_multiprocessing,
             shuffle=shuffle,
-            initial_epoch=initial_epoch)
+            initial_epoch=initial_epoch,
+            skip_data_checks=skip_data_checks)
 
     @interfaces.legacy_generator_methods_support
     def evaluate_generator(self, generator,
