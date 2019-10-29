@@ -339,6 +339,9 @@ class Concatenate(_Merge):
 
     def __init__(self, axis=-1, **kwargs):
         super(Concatenate, self).__init__(**kwargs)
+        if axis == 0:
+            raise ValueError('A `Concatenate` layer cannot merge tensors '
+                             'along the sample axis')
         self.axis = axis
         self.supports_masking = True
         self._reshape_required = False
