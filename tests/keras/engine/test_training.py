@@ -2150,7 +2150,6 @@ def test_sample_dimension_concatenate():
     i2 = np.asarray([[2,2]])
     output = np.asarray([[1,1],[2,4]])
 
-
     fit_history = model.fit(x = [i1,i2],y = output,
             skip_data_checks=True,
             batch_size=None,
