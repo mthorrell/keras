@@ -1699,6 +1699,12 @@ class Model(Network):
             initial_epoch: Integer.
                 Epoch at which to start training
                 (useful for resuming a previous training run).
+            skip_data_checks: Boolean. Skips initial checks on inputs. Specifically,
+                the first dimensions of inputs may be different within and across
+                the `x` and `y` inputs. This may be needed when, for example, a
+                concatenation operation is applied along the first dimension. In
+                this case, specifying batches of data within `fit` may not be 
+                possible and thus `steps_per_epoch` may also need to be specified.
 
         # Returns
             A `History` object. Its `History.history` attribute is
