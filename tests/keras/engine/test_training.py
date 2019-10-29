@@ -2137,6 +2137,27 @@ def test_add_metric_in_layer_call():
     assert np.isclose(history.history['metric_1'][-1], 5, 0)
     assert np.isclose(history.history['val_metric_1'][-1], 5, 0)
 
+def test_sample_dimension_concatenate():
+    input_1 = Input(batch_shape = (1,2))
+    input_2 = Input(batch_shape = (1,2))
+
+    concatenated_input = Concatenate(axis=0)([input_1,input_2])
+
+    model = Model(inputs=[input_1,input_2],outputs=concatenated_input)
+    model.compile(optimizer='adam',loss='mse')
+
+    i1 = np.asarray([[1,1]])
+    i2 = np.asarray([[2,2]])
+    output = np.asarray([[1,1],[2,4]])
+
+
+    fit_history = model.fit(x = [i1,i2],y = output,
+            skip_data_checks=True,
+            batch_size=None,
+            steps_per_epoch=1)
+
+    assert np.isclose(fit_history.history['loss'][0], 1.0)
+
 
 if __name__ == '__main__':
     pytest.main([__file__])
