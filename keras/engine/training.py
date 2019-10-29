@@ -1097,6 +1097,12 @@ class Model(Network):
                 `False`. Note that because this implementation relies on
                 multiprocessing, you should not pass non-picklable arguments to
                 the generator as they can't be passed easily to children processes.
+            skip_data_checks: Boolean. Skips initial checks on inputs. Specifically,
+                the first dimensions of inputs may be different within and across
+                the `x` and `y` inputs. This may be needed when, for example, a
+                concatenation operation is applied along the first dimension. In
+                this case, specifying batches of data within `fit` may not be 
+                possible and thus `steps_per_epoch` may also need to be specified.
             **kwargs: Used for backwards compatibility.
 
         # Returns
