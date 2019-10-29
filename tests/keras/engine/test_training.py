@@ -2137,6 +2137,9 @@ def test_add_metric_in_layer_call():
     assert np.isclose(history.history['metric_1'][-1], 5, 0)
     assert np.isclose(history.history['val_metric_1'][-1], 5, 0)
 
+def test_concatenate_batch_axis():
+    with pytest.raises(ValueError):
+        concatenated_input = Concatenate(axis=0)
 
 if __name__ == '__main__':
     pytest.main([__file__])
